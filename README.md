@@ -3,7 +3,7 @@ Some general data structures implemented using Java and C
 
 Each data structure has accompanied classes that go with it, so be sure to download all of the referenced files
 
-## Linked List
+## Singly Linked List
 - LinkedListInterface.java
 - SinglyLinkedList.java
 - SLLNode.java
