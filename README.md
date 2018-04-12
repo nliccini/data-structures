@@ -36,9 +36,11 @@ Each data structure has accompanied classes that go with it, so be sure to downl
 - AVLNode.java
 
 ## Array List
+- list.h
 - array_list.h
 - array_list.c
 
 ## Circularly Linked List
+- list.h
 - circ_list.h
 - circ_list.c
