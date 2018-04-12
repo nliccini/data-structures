@@ -1,9 +1,5 @@
 /**
- * CS 2110 - Spring 2018 - Homework #10
- *
- * @author Patrick Tam + Sanjay Sood
- *
- * array_list.h: DO NOT MODIFY
+ * array_list.h:
  */
 
 #ifndef ARRAY_LIST_H
