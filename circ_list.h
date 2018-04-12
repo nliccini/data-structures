@@ -1,9 +1,5 @@
 /**
- * CS 2110 - Spring 2018 - Homework #10
- *
- * @author Patrick Tam + Sanjay Sood
- *
- * circ_list.h: DO NOT MODIFY
+ * circ_list.h:
  */
 
 #ifndef CIRC_LIST_H
