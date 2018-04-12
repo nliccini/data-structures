@@ -1,7 +1,8 @@
 /**
+ *
  * @author Nick Liccini
  *
- * array_list.c:
+ * array_list.c: fill in all functions
  */
 
 #include <stdbool.h>
@@ -253,7 +254,7 @@ int add_to_array_list(array_list_t* arr, int index, void* data)
         // Grow backing array
         if (arr->size >= arr->capacity) {
             // Grow the capacity
-            while (arr->size >= arr->capacity) {
+            while (arr->size > arr->capacity) {
                 arr->capacity += GROWTH_FACTOR;
             }
 
@@ -282,7 +283,7 @@ int add_to_array_list(array_list_t* arr, int index, void* data)
         // Grow backing array
         if (arr->size >= arr->capacity) {
             // Grow the capacity
-            while (arr->size >= arr->capacity) {
+            while (arr->size > arr->capacity) {
                 arr->capacity += GROWTH_FACTOR;
             }
 
@@ -309,7 +310,7 @@ int add_to_array_list(array_list_t* arr, int index, void* data)
         // Grow backing array
         if (arr->size >= arr->capacity) {
             // Grow the capacity
-            while (arr->size >= arr->capacity) {
+            while (arr->size > arr->capacity) {
                 arr->capacity += GROWTH_FACTOR;
             }
 
@@ -449,8 +450,9 @@ bool array_list_contains(array_list_t* arr, void* data, list_eq eq_func, void** 
         return found_item;
     }
 
+    void* entry = NULL;
     for (int i = 0; i < arr->size; ++i) {
-        void* entry = arr->entries[i];
+        entry = arr->entries[i];
         if ((*eq_func)(entry, data)) {
             *return_found = entry;
             found_item = true;
