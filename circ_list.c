@@ -1,9 +1,7 @@
 /**
- * CS 2110 - Spring 2018 - Homework #10
- *
  * @author Nick Liccini
  *
- * circ_list.c: fill in all functions
+ * circ_list.c:
  */
 
 #include <stdbool.h>
