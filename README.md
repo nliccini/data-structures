@@ -1,5 +1,5 @@
 # data-structures
-Some general data structures implemented using Java
+Some general data structures implemented using Java and C
 
 Each data structure has accompanied classes that go with it, so be sure to download all of the referenced files
 
@@ -34,3 +34,11 @@ Each data structure has accompanied classes that go with it, so be sure to downl
 - AVLInterface.java
 - AVL.java
 - AVLNode.java
+
+## Array List
+- array_list.h
+- array_list.c
+
+## Circularly Linked List
+- circ_list.h
+- circ_list.c
