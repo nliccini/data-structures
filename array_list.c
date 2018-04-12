@@ -254,8 +254,8 @@ int add_to_array_list(array_list_t* arr, int index, void* data)
         // Grow backing array
         if (arr->size >= arr->capacity) {
             // Grow the capacity
-            while (arr->size > arr->capacity) {
-                arr->capacity += GROWTH_FACTOR;
+            while (arr->size >= arr->capacity) {
+                arr->capacity *= GROWTH_FACTOR;
             }
 
             // Get more memory for the backing array
@@ -283,8 +283,8 @@ int add_to_array_list(array_list_t* arr, int index, void* data)
         // Grow backing array
         if (arr->size >= arr->capacity) {
             // Grow the capacity
-            while (arr->size > arr->capacity) {
-                arr->capacity += GROWTH_FACTOR;
+            while (arr->size >= arr->capacity) {
+                arr->capacity *= GROWTH_FACTOR;
             }
 
             // Get more memory for the backing array
@@ -310,8 +310,8 @@ int add_to_array_list(array_list_t* arr, int index, void* data)
         // Grow backing array
         if (arr->size >= arr->capacity) {
             // Grow the capacity
-            while (arr->size > arr->capacity) {
-                arr->capacity += GROWTH_FACTOR;
+            while (arr->size >= arr->capacity) {
+                arr->capacity *= GROWTH_FACTOR;
             }
 
             // Get more memory for the backing array
