@@ -1,9 +1,5 @@
 /**
- * CS 2110 - Spring 2018 - Homework #10
- *
- * @author Patrick Tam + Sanjay Sood
- *
- * list.h: DO NOT MODIFY
+ * list.h:
  */
 
 #ifndef LIST_H
