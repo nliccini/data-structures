@@ -478,7 +478,7 @@ int remove_from_linked_list(circ_list *list, int index, void** data_out)
         l_node* new_head = list->head->next;
 
         // Save the data being removed
-        *data_out = new_head->data;
+        *data_out = list->head->data;
 
         // Remove old head
         if (new_head != NULL) {
