@@ -1,7 +1,7 @@
 /**
  * @author Nick Liccini
  *
- * circ_list.c:
+ * circ_list.c: fill in all functions
  */
 
 #include <stdbool.h>
@@ -80,17 +80,20 @@ int destroy_linked_list(circ_list* list, list_op free_func)
     l_node* curr = list->head;
     l_node* next = NULL;
 
-    next = curr->next;
-    (*free_func)(curr->data);
-    free(curr);
-    curr = next;
-
-    for (int i = 1; i < list->size; ++i) {
+    if (curr != NULL) {
         next = curr->next;
         (*free_func)(curr->data);
         free(curr);
         curr = next;
+
+        for (int i = 1; i < list->size; ++i) {
+            next = curr->next;
+            (*free_func)(curr->data);
+            free(curr);
+            curr = next;
+        }
     }
+    
 
     free(list);
 
@@ -127,6 +130,9 @@ circ_list *shallow_copy_linked_list(circ_list *list_to_copy)
         return NULL;
     }
     new_list->size = list_to_copy->size;
+    if (list_to_copy->head == NULL) {
+        return new_list;
+    }
 
     // Create new head and add it to the new list
     new_curr = create_node(copy_curr->data);
@@ -135,30 +141,32 @@ circ_list *shallow_copy_linked_list(circ_list *list_to_copy)
     new_list->head->prev = new_list->head;
 
     // Create new nodes and add them to the new head
-    copy_curr = copy_curr->next;
-    l_node* new_next = NULL;
-    for (int i = 1; i < list_to_copy->size; ++i) {
-        new_next = create_node(copy_curr->data);
-        if (!new_next) {
-            // free all previously allocated new nodes
-            new_curr = new_list->head;
-            for (int j = 0; j < i; ++j) {
-                new_next = new_curr->next;
-                free(new_curr);
-                new_curr = new_next;
-            }
-            // free the new list
-            free(new_list);
-            return NULL;
-        }
-
-        // Set the node pointers
-        new_curr->next = new_next;
-        new_next->prev = new_curr;
-
-        // Update the loop parameters
-        new_curr = new_next;
+    if (copy_curr != NULL) {
         copy_curr = copy_curr->next;
+        l_node* new_next = NULL;
+        for (int i = 1; i < list_to_copy->size; ++i) {
+            new_next = create_node(copy_curr->data);
+            if (!new_next) {
+                // free all previously allocated new nodes
+                new_curr = new_list->head;
+                for (int j = 0; j < i; ++j) {
+                    new_next = new_curr->next;
+                    free(new_curr);
+                    new_curr = new_next;
+                }
+                // free the new list
+                free(new_list);
+                return NULL;
+            }
+
+            // Set the node pointers
+            new_curr->next = new_next;
+            new_next->prev = new_curr;
+
+            // Update the loop parameters
+            new_curr = new_next;
+            copy_curr = copy_curr->next;
+        }
     }
 
     // Set the head pointers
@@ -318,6 +326,12 @@ int add_to_linked_list(circ_list *list, int index, void *data)
         list->head = node_to_add;
         list->head->next = list->head;
         list->head->prev = list->head;
+    } else if (index == 0) {
+        list->size++;
+
+        node_to_add->next = list->head;
+        node_to_add->prev = list->head->prev;
+        list->head = node_to_add;
     } else {
         list->size++;
 
@@ -331,11 +345,9 @@ int add_to_linked_list(circ_list *list, int index, void *data)
         // Insert node_to_add between (index - 1)th (curr_node) and indexth node
         node_to_add->next = curr_node->next;
         node_to_add->prev = curr_node;
-        curr_node->next->prev = node_to_add;
         curr_node->next = node_to_add;
-
-        if (index == 0) {
-            list->head = node_to_add;
+        if (node_to_add->next) {
+            node_to_add->next->prev = node_to_add;
         }
     }
 
@@ -461,27 +473,23 @@ int remove_from_linked_list(circ_list *list, int index, void** data_out)
         // Set head to NULL
         list->head = NULL;
     } else if (index == 0) { // Remove head
-        // Set the new head if there is another node
-        l_node* new_head = NULL;
-        if (list->size >= 2) {
-            new_head = list->head->next;
-        }
-
         list->size--;
 
-        l_node* curr_node = list->head;
+        l_node* new_head = list->head->next;
 
         // Save the data being removed
-        *data_out = curr_node->data;
+        *data_out = new_head->data;
 
-        // Remove curr_node
-        curr_node->next->prev = curr_node->prev;
-        curr_node->prev->next = curr_node->next;
+        // Remove old head
+        if (new_head != NULL) {
+            new_head->prev = list->head->prev;
+            new_head->next = list->head->next;
+        }
 
-        // Free curr_node
-        free(curr_node);
+        // Free old head
+        free(list->head);
 
-        // Set the new head
+        // Update the head
         list->head = new_head;
     } else { // Remove from middle
         list->size--;
