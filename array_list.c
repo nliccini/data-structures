@@ -1,8 +1,5 @@
 /**
- *
- * @author Nick Liccini
- *
- * array_list.c: fill in all functions
+ * array_list.c
  */
 
 #include <stdbool.h>
