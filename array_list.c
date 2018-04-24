@@ -1,5 +1,5 @@
 /**
- * array_list.c
+ * array_list.c: fill in all functions
  */
 
 #include <stdbool.h>
@@ -234,6 +234,7 @@ int add_to_array_list(array_list_t* arr, int index, void* data)
 
     void** ptr = NULL;
     int oldSize = arr->size;
+    int oldCapacity = arr->capacity;
 
     // Wrap index around if applicable
     while (index < 0) {
@@ -258,7 +259,8 @@ int add_to_array_list(array_list_t* arr, int index, void* data)
             // Get more memory for the backing array
             ptr = realloc(arr->entries, arr->capacity * sizeof(void*));
             if (!ptr) {
-                arr->size--;
+                arr->capacity = oldCapacity;
+                arr->size = oldSize;
                 return 1;
             }
 
@@ -287,7 +289,8 @@ int add_to_array_list(array_list_t* arr, int index, void* data)
             // Get more memory for the backing array
             ptr = realloc(arr->entries, arr->capacity * sizeof(void*));
             if (!ptr) {
-                arr->size--;
+                arr->capacity = oldCapacity;
+                arr->size = oldSize;
                 return 1;
             }
 
@@ -314,7 +317,8 @@ int add_to_array_list(array_list_t* arr, int index, void* data)
             // Get more memory for the backing array
             ptr = realloc(arr->entries, arr->capacity * sizeof(void*));
             if (!ptr) {
-                arr->size--;
+                arr->capacity = oldCapacity;
+                arr->size = oldSize;
                 return 1;
             }
 
@@ -418,6 +422,7 @@ int remove_from_array_list(array_list_t* arr, int index, void** data_out)
             arr->entries = ptr;
         }
     } else if (index > arr->size - 1) { // Nothing here
+        *data_out = NULL;
         return 1;
     }
 
