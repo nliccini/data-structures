@@ -18,7 +18,7 @@ Each data structure has accompanied classes that go with it, so be sure to downl
 - QueueInterface.java
 - ArrayQueue.java
 - LinkedQueue.java
-- LinkedNote.java
+- LinkedNode.java
 
 ## BST
 - BSTInterface.java
